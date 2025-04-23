@@ -29,8 +29,8 @@ public class Brasserie implements Brew{
        b.forEach((key, value) -> {
         switch (key){
             case "nom":
-                Brew.setNomBiere(value -> {
-                    Brew.nomBiere = value;
+                Brew.setNomBiere((value) -> {
+                    Brew.nomBiere = (String) value;
                 });
 
             case "type":
