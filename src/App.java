@@ -1,9 +1,10 @@
-import brasserie.Blonde;
+import brasserie.model.Blonde;
 import java.util.ArrayList;
 import java.util.List;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
         List<String> biereDuDemonIngredients = new ArrayList<>();
         biereDuDemonIngredients.add("Eau");
         biereDuDemonIngredients.add("Malte d'orge");
@@ -13,7 +14,6 @@ public class App {
         biereDuDemonIngredients.add("Houblon");
         Blonde biereDuDemon = new Blonde("Bière du Démon", "Bière Forte", 12, 3.10, biereDuDemonIngredients);
         System.out.println("\n"+biereDuDemon+"\n");
-
 
         List<String> grimBlondeIngredients = new ArrayList<>();
         grimBlondeIngredients.add("Eau");

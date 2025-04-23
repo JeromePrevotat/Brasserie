@@ -1,11 +1,11 @@
-package brasserie;
+package brasserie.model;
 
 import java.util.List;
 
-public class Rousse extends Beer{
-    public final String couleur = "Rousse";
+public class Noire extends Beer {
+    public final String couleur = "Noire";
 
-    public Rousse(String nom, String type, double degree, double prix, List<String> ingredients){
+    public Noire(String nom, String type, double degree, double prix, List<String> ingredients){
         super(nom, type, degree, prix, ingredients);
     }
 

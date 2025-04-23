@@ -1,6 +1,7 @@
-package brasserie;
+package brasserie.model;
 
-import java.util.ArrayList;
+import brasserie.ErrorHandler;
+
 import java.util.List;
 
 public abstract class Beer {
@@ -8,7 +9,7 @@ public abstract class Beer {
     public String type;
     public double degree;
     public double prix;
-    List<String> ingredients = new ArrayList<>();
+    List<String> ingredients;
 
     public Beer(String nom, String type, double degree, double prix, List<String>ingredients){
         this.nom = nom;

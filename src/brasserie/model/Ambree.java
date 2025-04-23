@@ -1,8 +1,8 @@
-package brasserie;
+package brasserie.model;
 
 import java.util.List;
 
-public class Ambree extends Beer{
+public class Ambree extends Beer {
     public final String couleur = "Ambree";
 
     public Ambree(String nom, String type, double degree, double prix, List<String> ingredients){
