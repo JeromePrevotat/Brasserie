@@ -9,23 +9,41 @@ public class App {
 
         Brasserie brasserie = new Brasserie("Brasserie R5");
 
-        Recette recetteBiereDuDemon = new Recette(
+        try {
+            Recette recetteBiereDuDemon = new Recette(
+                    Couleur.BLONDE,
+                    "Bière du Démon",
+                    "Bière Forte",
+                    12,
+                    3.10,
+                    List.of(
+                            "Eau",
+                            "Malte d'orge",
+                            "Maïs",
+                            "Riz",
+                            "Extraits de Houblon",
+                            "Houblon"
+                    )
+            );
+            Beer biereDuDemon = brasserie.brew(recetteBiereDuDemon);
+            System.out.println("\n" + biereDuDemon + "\n");
+        } catch (IllegalArgumentException e) {
+            // System.err.println(e.getMessage());
+            System.err.println("CRASH");
+        }
+
+        
+        
+
+        Recette test = new Recette(
                 Couleur.BLONDE,
-                "Bière du Démon",
+                "test",
                 "Bière Forte",
                 12,
                 3.10,
-                List.of(
-                        "Eau",
-                        "Malte d'orge",
-                        "Maïs",
-                        "Riz",
-                        "Extraits de Houblon",
-                        "Houblon"
-                )
+                null
         );
-
-        Beer biereDuDemon = brasserie.brew(recetteBiereDuDemon);
-        System.out.println("\n" + biereDuDemon + "\n");
+        Beer t = brasserie.brew(test);
+        System.out.println("\n" + t + "\n");        
     }
 }

@@ -3,7 +3,11 @@ import java.util.List;
 
 public class ErrorHandler {
     public static void handleIngredients(List<String> ingredients) throws IllegalArgumentException{
-        if (ingredients == null) throw new IllegalArgumentException("Error: Argument <ingredients> cannot be null\n");
-
+        System.out.println("HANDLER");
+        if (ingredients == null){
+            System.err.println("IF");
+            throw new IllegalArgumentException("Error: Argument <ingredients> cannot be null\n");
+        }
     }
+
 }

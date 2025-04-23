@@ -1,7 +1,6 @@
 package brasserie.model;
 
 import brasserie.ErrorHandler;
-
 import java.util.List;
 
 public class Beer {
@@ -77,10 +76,10 @@ public class Beer {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getNom()).append(" (").append(this.getCouleur()).append(")").append("\n")
+        sb.append(this.getNom()).append(" (").append(this.getCouleur()).append(")\n")
           .append("Type: ").append(this.getType())
-          .append(" (").append(this.getDegree()).append("°)")
-          .append("\nComposition: ").append(this.getIngredients().toString())
+          .append(" (").append(this.getDegree()).append("°)\n")
+          .append("Composition: ").append(this.getIngredients().toString())
           .append("\nPrix Unite: ").append(this.prix);
 
         return sb.toString();
