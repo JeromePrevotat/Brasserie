@@ -1,3 +1,5 @@
+import brasserie.Brasserie;
+import brasserie.model.Beer;
 import brasserie.model.Blonde;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +34,11 @@ public class App {
         deliriumChristmasIngredients.add("Levure");
         Blonde deliriumChristmas = new Blonde("Delirium Christmas", "Bière Triple Forte", 10, 3.15, deliriumChristmasIngredients);
         System.out.println("\n"+deliriumChristmas+"\n");
+
+        Brasserie brass = new Brasserie("mybeers");
+        // String couleur, String nom, String type, double degree, double prix, List<String> ingredients
+        Beer b1 = brass.brew("Blonde", "Bière du Démon", "Bière Forte", 12, 3.10, biereDuDemonIngredients);
+        System.out.println(b1);
+
     }
 }

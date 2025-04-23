@@ -1,7 +1,6 @@
 package brasserie;
 
 import brasserie.model.*;
-
 import java.util.List;
 
 public class Brasserie {
@@ -22,7 +21,7 @@ public class Brasserie {
     }
 
     // Méthode dédiée à la création de bière
-    private Beer brew(String couleur, String nom, String type, double degree, double prix, List<String> ingredients) {
+    public Beer brew(String couleur, String nom, String type, double degree, double prix, List<String> ingredients) {
         return switch (couleur) {
             case "Ambree" -> new Ambree(nom, type, degree, prix, ingredients);
             case "Blanche" -> new Blanche(nom, type, degree, prix, ingredients);
