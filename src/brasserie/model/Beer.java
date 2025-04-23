@@ -4,14 +4,16 @@ import brasserie.ErrorHandler;
 
 import java.util.List;
 
-public abstract class Beer {
-    public String nom;
-    public String type;
-    public double degree;
-    public double prix;
-    List<String> ingredients;
+public class Beer {
+    private Couleur couleur;
+    private String nom;
+    private String type;
+    private double degree;
+    private double prix;
+    private List<String> ingredients;
 
-    public Beer(String nom, String type, double degree, double prix, List<String>ingredients){
+    public Beer(Couleur couleur, String nom, String type, double degree, double prix, List<String> ingredients) {
+        this.couleur = couleur;
         this.nom = nom;
         this.type = type;
         this.degree = degree;
@@ -20,46 +22,67 @@ public abstract class Beer {
         this.ingredients = ingredients;
     }
 
-    // GETTER
-    public String getNom(){
-        return this.nom;
-    }
-    
-    public String getType(){
-        return this.type;
+    // GETTERS
+    public String getNom() {
+        return nom;
     }
 
-    public Double getDegree(){
-        return this.degree;
+    public String getType() {
+        return type;
     }
 
-    public double getPrix(){
-        return this.prix;
-    }
-    
-    public List<String> getIngredients(){
-        return this.ingredients;
+    public double getDegree() {
+        return degree;
     }
 
-    // SETTER
-    public void setNom(String nom){
+    public double getPrix() {
+        return prix;
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public Couleur getCouleur() {
+        return couleur;
+    }
+
+    // SETTERS
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public void setType(String type){
+    public void setType(String type) {
         this.type = type;
     }
 
-    public void setDegree(double degree){
+    public void setDegree(double degree) {
         this.degree = degree;
     }
 
-    public void setPrix(double prix){
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
-    public void setIngredients(List<String> ingredients){
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    // METHODS
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getNom()).append(" (").append(this.getCouleur()).append(")").append("\n")
+          .append("Type: ").append(this.getType())
+          .append(" (").append(this.getDegree()).append("°)")
+          .append("\nComposition: ").append(this.getIngredients().toString())
+          .append("\nPrix Unite: ").append(this.prix);
+
+        return sb.toString();
+    }
 }
