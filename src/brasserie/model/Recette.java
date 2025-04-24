@@ -18,7 +18,6 @@ public class Recette {
         this.degree = degree;
         this.prix = prix;
         ErrorHandler.handleIngredients(ingredients);
-        System.err.println("NOT CATCHED");
         this.ingredients = ingredients;
     }
 

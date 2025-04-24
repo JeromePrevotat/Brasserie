@@ -27,23 +27,9 @@ public class App {
             );
             Beer biereDuDemon = brasserie.brew(recetteBiereDuDemon);
             System.out.println("\n" + biereDuDemon + "\n");
+             
         } catch (IllegalArgumentException e) {
-            // System.err.println(e.getMessage());
-            System.err.println("CRASH");
+            System.err.println(e.getMessage());
         }
-
-        
-        
-
-        Recette test = new Recette(
-                Couleur.BLONDE,
-                "test",
-                "Bière Forte",
-                12,
-                3.10,
-                null
-        );
-        Beer t = brasserie.brew(test);
-        System.out.println("\n" + t + "\n");        
     }
 }
