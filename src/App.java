@@ -12,7 +12,7 @@ public class App {
         try {
             Recette recetteBiereDuDemon = new Recette(
                     Couleur.BLONDE,
-                    "Bière du Démon",
+                    "",
                     "Bière Forte",
                     12,
                     3.10,
