@@ -6,7 +6,7 @@ public class ErrorHandler {
         if (ingredients == null) throw new IllegalArgumentException("Error: Argument <ingredients> cannot be null\n");
     }
 
-    public static void handleEmptyString(String s) throws IllegalArgumentException{
-        if (s.equals("")) throw new IllegalArgumentException("Error: The Argument of type String cannot be Empty");
+    public static void handleEmptyString(String s, String argName) throws IllegalArgumentException{
+        if (s.equals("")) throw new IllegalArgumentException("Error: The Argument <" + argName + "> cannot be an Empty String");
     }
 }

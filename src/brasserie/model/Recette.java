@@ -13,8 +13,7 @@ public class Recette {
 
     public Recette(Couleur couleur, String nom, String type, double degree, double prix, List<String> ingredients){
         this.couleur = couleur;
-        System.out.println("NOM: " + nom);
-        ErrorHandler.handleEmptyString(nom);
+        ErrorHandler.handleEmptyString(nom, "nom");
         this.nom = nom;
         this.type = type;
         this.degree = degree;
