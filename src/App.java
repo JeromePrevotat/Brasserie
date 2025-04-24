@@ -7,7 +7,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
 
-        Brasserie brasserie = new Brasserie("Brasserie R5");
+        Brasserie brasserie = new Brasserie("Brasserie R5", 5);
 
         try {
             Recette recetteBiereDuDemon = new Recette(
