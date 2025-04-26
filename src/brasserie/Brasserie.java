@@ -1,10 +1,13 @@
 package brasserie;
 
 import brasserie.model.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Brasserie {
     private String nom;
     private int cuves;
+    private static List<Recette> RecipeList = new ArrayList<Recette>();
 
     public Brasserie(String nom, int cuves) {
         this.nom = nom;

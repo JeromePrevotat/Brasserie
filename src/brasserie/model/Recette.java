@@ -1,6 +1,9 @@
 package brasserie.model;
 import brasserie.ErrorHandler;
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Recette {
 
@@ -72,4 +75,20 @@ public class Recette {
         this.ingredients = ingredients;
     }
 
+    // METHODS
+    public static Recette readRecipeFromFile(String fPath) throws Exception {
+        File f = new File(fPath);
+        String[] args;
+        ErrorHandler.handleFileNotFound(f);
+        ErrorHandler.handleFileReadRight(f);
+
+        try (Scanner fileReader = new Scanner(f)) {
+            while (fileReader.hasNextLine()){
+                String line = fileReader.nextLine();
+                args = line.split(",");
+                System.out.println(Arrays.toString(args));
+            }
+        }
+        return null;
+    }
 }
