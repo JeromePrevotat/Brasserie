@@ -36,4 +36,24 @@ public class ErrorHandler {
     public static void handlePrix(double p) throws IllegalArgumentException{
         if (p < 0) throw new IllegalArgumentException("Error: Argument <prix> cannot be Lesser than Zero");
     }
+
+    public static void handleCSVArgParsing(String[] args) throws IllegalArgumentException{
+        if (args.length != 6) throw new IllegalArgumentException("Error: Recette Expected 6 Arguments but " + args.length + " found");
+    }
+
+    public static void handleCSVArgType(String[] args) throws NumberFormatException{
+        try{
+            Double.valueOf(args[3]);
+        }
+        catch (NumberFormatException e){
+            throw new NumberFormatException("Error: Argument <degree> cannot be properly converted to a Floating Number value");
+        }
+
+        try{
+            Double.valueOf(args[4]);
+        }
+        catch (NumberFormatException e){
+            throw new NumberFormatException("Error: Argument <prix> cannot be properly converted to a Floating Number value");
+        }        
+    }
 }
