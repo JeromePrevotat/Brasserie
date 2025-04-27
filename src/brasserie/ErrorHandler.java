@@ -38,7 +38,7 @@ public class ErrorHandler {
     }
 
     public static void handleCSVArgParsing(String[] args) throws IllegalArgumentException{
-        if (args.length != 6) throw new IllegalArgumentException("Error: Recette Expected 6 Arguments but " + args.length + " found");
+        if (args.length < 6) throw new IllegalArgumentException("Error: Recette Expected 6 Arguments but " + args.length + " found");
     }
 
     public static void handleCSVArgType(String[] args) throws NumberFormatException{

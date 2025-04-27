@@ -9,7 +9,7 @@ public class Recette {
 
     private Couleur couleur;
     private String nom;
-    private String type;
+    private String type = "";
     private double degree;
     private double prix;
     private List<String> ingredients;
@@ -94,7 +94,12 @@ public class Recette {
             while (fileReader.hasNextLine()){
                 String line = fileReader.nextLine();
                 args = line.split(",");
+
+                // TO DO Parse 6+ argument to List<String>
                 System.out.println(Arrays.toString(args));
+                System.out.println("LENGTH: " + args.length);
+                ErrorHandler.handleCSVArgParsing(args);
+                ErrorHandler.handleCSVArgType(args);
             }
         }
         return null;
