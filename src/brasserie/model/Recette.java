@@ -15,11 +15,14 @@ public class Recette {
     private List<String> ingredients;
 
     public Recette(Couleur couleur, String nom, String type, double degree, double prix, List<String> ingredients){
+        ErrorHandler.handleCouleurEnum(couleur.name());
         this.couleur = couleur;
         ErrorHandler.handleEmptyString(nom, "nom");
         this.nom = nom;
         this.type = type;
+        ErrorHandler.handleDegree(degree);
         this.degree = degree;
+        ErrorHandler.handleDegree(prix);
         this.prix = prix;
         ErrorHandler.handleIngredients(ingredients);
         this.ingredients = ingredients;
