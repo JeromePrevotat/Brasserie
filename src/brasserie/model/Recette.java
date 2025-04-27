@@ -55,10 +55,12 @@ public class Recette {
 
     // SETTERS
     public void setCouleur(Couleur couleur) {
+        ErrorHandler.handleCouleurEnum(couleur.name());
         this.couleur = couleur;
     }
 
     public void setNom(String nom) {
+        ErrorHandler.handleEmptyString(nom, "nom");
         this.nom = nom;
     }
 
@@ -67,14 +69,17 @@ public class Recette {
     }
 
     public void setDegree(double degree) {
+        ErrorHandler.handleDegree(degree);
         this.degree = degree;
     }
 
     public void setPrix(double prix) {
+        ErrorHandler.handleDegree(prix);
         this.prix = prix;
     }
 
     public void setIngredients(List<String> ingredients) {
+        ErrorHandler.handleIngredients(ingredients);
         this.ingredients = ingredients;
     }
 
