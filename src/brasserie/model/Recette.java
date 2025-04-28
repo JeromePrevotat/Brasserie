@@ -101,22 +101,18 @@ public class Recette {
                 String line = fileReader.nextLine();
                 args = line.split(",");
                 // Reset iterators
-                System.out.println("ING: " + ingredients);
                 ingredients.clear();
-                System.out.println("CLEARED ING: " + ingredients);
                 int i = 5;
                 // Get Ingredients as List
                 while (i < args.length){
                     ingredients.add(args[i]);
                     i++;
                 }
-                System.out.println("NEW ING: " + ingredients);
                 // Handles Errror
                 ErrorHandler.handleCSVArgParsing(args);
                 ErrorHandler.handleCSVArgType(args);
                 // Create New Recipe
                 recipeList.add(new Recette(Couleur.valueOf(args[0]), args[1], args[2], Double.parseDouble(args[3]), Double.parseDouble(args[4]), ingredients));
-                System.out.println("RLIST: " + recipeList.toString());
             }
         }
         return recipeList;
