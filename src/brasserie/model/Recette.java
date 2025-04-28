@@ -1,7 +1,7 @@
 package brasserie.model;
 import brasserie.ErrorHandler;
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,9 +84,13 @@ public class Recette {
     }
 
     // METHODS
-    public static Recette readRecipeFromFile(String fPath) throws Exception {
+    public static List<Recette> readRecipeFromFile(String fPath) throws Exception {
+        List<Recette> recipeList = new ArrayList<>();
         File f = new File(fPath);
         String[] args;
+        List<String> ingredients = new ArrayList<>();
+        int i = 5;
+
         ErrorHandler.handleFileNotFound(f);
         ErrorHandler.handleFileReadRight(f);
 
@@ -94,14 +98,22 @@ public class Recette {
             while (fileReader.hasNextLine()){
                 String line = fileReader.nextLine();
                 args = line.split(",");
-
-                // TO DO Parse 6+ argument to List<String>
-                System.out.println(Arrays.toString(args));
-                System.out.println("LENGTH: " + args.length);
+                while (i < args.length){
+                    ingredients.add(args[i]);
+                    i++;
+                }
                 ErrorHandler.handleCSVArgParsing(args);
                 ErrorHandler.handleCSVArgType(args);
+                recipeList.add(new Recette(Couleur.valueOf(args[0]), args[1], args[2], Double.parseDouble(args[3]), Double.parseDouble(args[4]), ingredients));
             }
         }
-        return null;
+        return recipeList;
+    }
+
+    @Override
+    public String toString(){
+        String s;
+        s = "Recette de " + this.nom + "\nCouleur: " + this.couleur + " " + this.type + "\nDegré: " + this.degree + "\nPrix: " + this.prix + "\nComposition: " + this.ingredients.toString() + "\n";
+        return s;
     }
 }

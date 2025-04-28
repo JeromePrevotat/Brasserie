@@ -7,7 +7,7 @@ import java.util.List;
 public class Brasserie {
     private String nom;
     private int cuves;
-    private static List<Recette> RecipeList = new ArrayList<Recette>();
+    private static List<Recette> RecipeList = new ArrayList<>();
 
     public Brasserie(String nom, int cuves) {
         this.nom = nom;
