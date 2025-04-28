@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Recette {
 
@@ -25,7 +26,8 @@ public class Recette {
         ErrorHandler.handleDegree(prix);
         this.prix = prix;
         ErrorHandler.handleIngredients(ingredients);
-        this.ingredients = ingredients;
+        this.ingredients = ingredients.stream()
+                                .collect(Collectors.toList());
     }
 
     // GETTERS
@@ -89,22 +91,32 @@ public class Recette {
         File f = new File(fPath);
         String[] args;
         List<String> ingredients = new ArrayList<>();
-        int i = 5;
 
         ErrorHandler.handleFileNotFound(f);
         ErrorHandler.handleFileReadRight(f);
 
         try (Scanner fileReader = new Scanner(f)) {
             while (fileReader.hasNextLine()){
+                // GNL
                 String line = fileReader.nextLine();
                 args = line.split(",");
+                // Reset iterators
+                System.out.println("ING: " + ingredients);
+                ingredients.clear();
+                System.out.println("CLEARED ING: " + ingredients);
+                int i = 5;
+                // Get Ingredients as List
                 while (i < args.length){
                     ingredients.add(args[i]);
                     i++;
                 }
+                System.out.println("NEW ING: " + ingredients);
+                // Handles Errror
                 ErrorHandler.handleCSVArgParsing(args);
                 ErrorHandler.handleCSVArgType(args);
+                // Create New Recipe
                 recipeList.add(new Recette(Couleur.valueOf(args[0]), args[1], args[2], Double.parseDouble(args[3]), Double.parseDouble(args[4]), ingredients));
+                System.out.println("RLIST: " + recipeList.toString());
             }
         }
         return recipeList;
