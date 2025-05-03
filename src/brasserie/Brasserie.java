@@ -11,12 +11,8 @@ public class Brasserie {
 
     public Brasserie(String nom, int cuves) {
         this.nom = nom;
-        try {
-            ErrorHandler.handleNbCuves(cuves);
-            this.cuves = cuves;
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        ErrorHandler.handleNbCuves(cuves);
+        this.cuves = cuves;
     }
 
     // GETTER

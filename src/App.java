@@ -11,9 +11,9 @@ public class App {
 
         List<Recipe> recipeList = new ArrayList<>();
 
-        Brasserie brasserie = new Brasserie("Brasserie R5", 5);
-
+        
         try {
+            Brasserie brasserie = new Brasserie("Brasserie R5", 5);
            recipeList = Recipe.readRecipeFromFile(RECIPES_PATH);
         } catch (Exception e) {
             System.err.println(e.getMessage());

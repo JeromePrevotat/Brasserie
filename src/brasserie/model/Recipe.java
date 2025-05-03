@@ -3,7 +3,6 @@ import brasserie.ErrorHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +17,9 @@ public class Recipe {
     private double degree;
     private double prix;
     private List<String> ingredients;
+    private int brewingTime;
 
-    public Recipe(Color couleur, String nom, String type, double degree, double prix, List<String> ingredients){
+    public Recipe(Color couleur, String nom, String type, double degree, double prix, int brewingTime, List<String> ingredients){
         ErrorHandler.handleCouleurEnum(couleur.name());
         this.couleur = couleur;
         ErrorHandler.handleEmptyString(nom, "nom");
@@ -32,6 +32,7 @@ public class Recipe {
         ErrorHandler.handleIngredients(ingredients);
         this.ingredients = ingredients.stream()
                                 .collect(Collectors.toList());
+        this.brewingTime = brewingTime;
     }
 
     // GETTERS
@@ -53,6 +54,10 @@ public class Recipe {
 
     public double getPrix() {
         return this.prix;
+    }
+
+    public int getBrewingTime() {
+        return this.brewingTime;
     }
 
     public List<String> getIngredients() {
@@ -84,6 +89,10 @@ public class Recipe {
         this.prix = prix;
     }
 
+    public void setBrewingTime(int brewingTime) {
+        this.brewingTime = brewingTime;
+    }
+
     public void setIngredients(List<String> ingredients) {
         ErrorHandler.handleIngredients(ingredients);
         this.ingredients = ingredients;
@@ -106,7 +115,7 @@ public class Recipe {
                 args = line.split(",");
                 // Reset iterators
                 ingredients.clear();
-                int i = 5;
+                int i = 6;
                 // Get Ingredients as List
                 while (i < args.length){
                     ingredients.add(args[i]);
@@ -116,7 +125,13 @@ public class Recipe {
                 ErrorHandler.handleCSVArgParsing(args);
                 ErrorHandler.handleCSVArgType(args);
                 // Create New Recipe
-                recipeList.add(new Recipe(Couleur.valueOf(args[0]), args[1], args[2], Double.parseDouble(args[3]), Double.parseDouble(args[4]), ingredients));
+                recipeList.add(new Recipe(Color.valueOf(args[0]),           // Color
+                                            args[1],                        // Name
+                                            args[2],                        // Type
+                                            Double.parseDouble(args[3]),    // Degree
+                                            Double.parseDouble(args[4]),    // Prix
+                                            Integer.parseInt(args[5]),      // Brewing Time
+                                            ingredients));                  // Ingredients
             }
         }
         return recipeList;
@@ -139,6 +154,7 @@ public class Recipe {
                     .append(r.type).append(",")
                     .append(r.degree).append(",")
                     .append(r.prix).append(",")
+                    .append(r.brewingTime).append(",")
                     .append(r.ingredients.toString()
                         .replace(" ", "")
                         .replace("[", "")
@@ -151,8 +167,14 @@ public class Recipe {
 
     @Override
     public String toString(){
-        String s;
-        s = "Recette de " + this.nom + "\nCouleur: " + this.couleur + " " + this.type + "\nDegré: " + this.degree + "\nPrix: " + this.prix + "\nComposition: " + this.ingredients.toString() + "\n";
-        return s;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Recette de ").append(this.nom).append("\n")
+            .append("Couleur: ").append(this.couleur).append("\n")
+            .append("Type: ").append(this.type).append("\n")
+            .append("Degree: ").append(this.degree).append("\n")
+            .append("Prix: ").append(this.prix).append("\n")
+            .append("Brewing Time: ").append(this.brewingTime).append("\n")
+            .append("Composition: ").append(this.ingredients.toString()).append("\n");
+        return sb.toString();
     }
 }
