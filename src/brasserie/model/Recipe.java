@@ -32,6 +32,7 @@ public class Recipe {
         ErrorHandler.handleIngredients(ingredients);
         this.ingredients = ingredients.stream()
                                 .collect(Collectors.toList());
+        ErrorHandler.handleBrewingTime(brewingTime);
         this.brewingTime = brewingTime;
     }
 

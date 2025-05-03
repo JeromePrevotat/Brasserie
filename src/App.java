@@ -21,5 +21,9 @@ public class App {
         for (Recipe r : recipeList){
             System.out.println(r);
         }
+
+        while (true) { 
+            
+        }
     }
 }

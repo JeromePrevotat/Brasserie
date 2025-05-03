@@ -86,6 +86,14 @@ public class ErrorHandler {
         return true;
     }
 
+    public static boolean handleBrewingTime(int brewingTime){
+        if (brewingTime <= 0) throw new IllegalArgumentException("Error: Argument <brewingTime> must be Greater then Zero");
+        return true;
+    }
 
+    public static boolean handleNullRecipeList(List<Recipe> recipelist){
+        if (recipelist == null) throw new NullPointerException("Error: Argument <recipeList> cannot be Null");
+        return true;
+    }
 
 }

@@ -9,10 +9,12 @@ public class Brasserie {
     private int cuves;
     private List<Recipe> recipeList = new ArrayList<>();
 
-    public Brasserie(String nom, int cuves) {
+    public Brasserie(String nom, int cuves, List<Recipe>recipeList) {
         this.nom = nom;
         ErrorHandler.handleNbCuves(cuves);
         this.cuves = cuves;
+        ErrorHandler.handleNullRecipeList(recipeList);
+        this.recipeList = recipeList;
     }
 
     // GETTER
