@@ -1,6 +1,8 @@
 package brasserie.model;
 import brasserie.ErrorHandler;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -118,31 +120,19 @@ public class Recipe {
         return recipeList;
     }
 
-    public static boolean readRecipeFromFile(Recipe r, String fPath) throws Exception {
+    public static boolean writeRecipeFromFile(Recipe r, String fPath) throws Exception {
         File f = new File(fPath);
         String[] args;
         List<String> ingredients = new ArrayList<>();
 
-        ErrorHandler.handleFileNotFound(f);
-        ErrorHandler.handleFileReadRight(f);
+        if(ErrorHandler.handleFileNotFound(f) || ErrorHandler.handleFileWriteRight(f)) return false;
 
-        try (Scanner fileReader = new Scanner(f)) {
-            while (fileReader.hasNextLine()){
-                // GNL
-                String line = fileReader.nextLine();
-                args = line.split(",");
-                // Reset iterators
-                ingredients.clear();
-                int i = 5;
-                // Get Ingredients as List
-                while (i < args.length){
-                    ingredients.add(args[i]);
-                    i++;
-                }
-                // Handles Errror
-                ErrorHandler.handleCSVArgParsing(args);
-                ErrorHandler.handleCSVArgType(args);
-            }
+        try (FileWriter fw = new FileWriter(fPath,true);)
+        {
+            fw.write("add a line\n");//appends the string to the file
+        } catch(IOException e){
+            System.err.println("Error: " + e.getMessage());
+            return false;
         }
         return true;
     }

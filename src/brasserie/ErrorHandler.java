@@ -6,42 +6,54 @@ import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 public class ErrorHandler {
-    public static void handleIngredients(List<String> ingredients) throws IllegalArgumentException{
+    public static boolean handleIngredients(List<String> ingredients) throws IllegalArgumentException{
         if (ingredients == null) throw new IllegalArgumentException("Error: Argument <ingredients> cannot be null");
+        return false;
     }
 
-    public static void handleEmptyString(String s, String argName) throws IllegalArgumentException{
+    public static boolean handleEmptyString(String s, String argName) throws IllegalArgumentException{
         if (s.equals("")) throw new IllegalArgumentException("Error: The Argument <" + argName + "> cannot be an Empty String");
+        return false;
     }
 
-    public static void handleFileNotFound(File f) throws FileNotFoundException{
+    public static boolean handleFileNotFound(File f) throws FileNotFoundException{
         if (!(f.exists())) throw new FileNotFoundException("Error: No such File or Directory");
+        return false;
     }
 
-    public static void handleFileReadRight(File f) throws AccessDeniedException{
+    public static boolean handleFileReadRight(File f) throws AccessDeniedException{
         if (!(f.canRead())) throw new AccessDeniedException("Error: You don't have Read Permission for this File");
+        return false;
     }
 
-    public static void handleCouleurEnum(String s) throws IllegalArgumentException{
+    public static boolean handleFileWriteRight(File f) throws AccessDeniedException{
+        if (!(f.canWrite())) throw new AccessDeniedException("Error: You don't have Read Permission for this File");
+        return false;
+    }
+
+    public static boolean handleCouleurEnum(String s) throws IllegalArgumentException{
         for (Color c : Color.values()) {
-            if (c.name().equals(s)) return;
+            if (c.name().equals(s)) return false;
         }
         throw new IllegalArgumentException("Error: Argument <color> does not match any known Color");
     }
 
-    public static void handleDegree(double d) throws IllegalArgumentException{
+    public static boolean handleDegree(double d) throws IllegalArgumentException{
         if (d < 0) throw new IllegalArgumentException("Error: Argument <degree> cannot be Lesser than Zero");
+        return false;
     }
     
-    public static void handlePrix(double p) throws IllegalArgumentException{
+    public static boolean handlePrix(double p) throws IllegalArgumentException{
         if (p < 0) throw new IllegalArgumentException("Error: Argument <prix> cannot be Lesser than Zero");
+        return false;
     }
 
-    public static void handleCSVArgParsing(String[] args) throws IllegalArgumentException{
+    public static boolean handleCSVArgParsing(String[] args) throws IllegalArgumentException{
         if (args.length < 6) throw new IllegalArgumentException("Error: Recette Expected 6 Arguments but " + args.length + " found");
+        return false;
     }
 
-    public static void handleCSVArgType(String[] args) throws NumberFormatException{
+    public static boolean handleCSVArgType(String[] args) throws NumberFormatException{
         try{
             Double.valueOf(args[3]);
         }
@@ -54,6 +66,7 @@ public class ErrorHandler {
         }
         catch (NumberFormatException e){
             throw new NumberFormatException("Error: Argument <prix> cannot be properly converted to a Floating Number value");
-        }        
+        }
+        return false;     
     }
 }
