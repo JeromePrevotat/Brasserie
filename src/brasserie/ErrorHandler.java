@@ -81,5 +81,11 @@ public class ErrorHandler {
         return false;
     }
 
+    public static boolean handleNbCuves(int nbCuves){
+        if (nbCuves <= 0) throw new IllegalArgumentException("Error: Argument <cuves> must be Greater then Zero");
+        return true;
+    }
+
+
 
 }

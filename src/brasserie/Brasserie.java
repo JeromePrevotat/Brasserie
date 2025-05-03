@@ -7,11 +7,16 @@ import java.util.List;
 public class Brasserie {
     private String nom;
     private int cuves;
-    private static List<Recipe> RecipeList = new ArrayList<>();
+    private List<Recipe> recipeList = new ArrayList<>();
 
     public Brasserie(String nom, int cuves) {
         this.nom = nom;
-        this.cuves = cuves;
+        try {
+            ErrorHandler.handleNbCuves(cuves);
+            this.cuves = cuves;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     // GETTER
@@ -23,6 +28,10 @@ public class Brasserie {
         return this.cuves;
     }
 
+    public List<Recipe> getRecipeList(){
+        return this.recipeList;
+    }
+
     // SETTER
     public void setNom(String nom) {
         this.nom = nom;
@@ -32,6 +41,12 @@ public class Brasserie {
         this.cuves = cuves;
     }
 
+    public void getRecipeList(List<Recipe> recipeList){
+        this.recipeList = recipeList;
+    }
+
+
+    // METHODS
     public Beer brew(Recipe recette) {
         return new Beer(
                 recette.getCouleur(),
