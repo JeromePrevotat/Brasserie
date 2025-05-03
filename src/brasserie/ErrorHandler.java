@@ -1,5 +1,6 @@
 package brasserie;
 import brasserie.model.Color;
+import brasserie.model.Recipe;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.AccessDeniedException;
@@ -69,4 +70,16 @@ public class ErrorHandler {
         }
         return false;     
     }
+
+    public static boolean handleNullString(String s) throws NullPointerException{
+        if (s == null) throw new NullPointerException("Error: Argument type of <String> cannot be null");
+        return false;
+    }
+
+    public static boolean handleNullRecipe(Recipe r) throws NullPointerException{
+        if (r == null) throw new NullPointerException("Error: Argument type of <Recipe> cannot be null");
+        return false;
+    }
+
+
 }

@@ -1,8 +1,10 @@
 package brasserie.model;
 import brasserie.ErrorHandler;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -121,18 +123,28 @@ public class Recipe {
     }
 
     public static boolean writeRecipeFromFile(Recipe r, String fPath) throws Exception {
-        File f = new File(fPath);
-        String[] args;
-        List<String> ingredients = new ArrayList<>();
-
-        if(ErrorHandler.handleFileNotFound(f) || ErrorHandler.handleFileWriteRight(f)) return false;
-
-        try (FileWriter fw = new FileWriter(fPath,true);)
-        {
-            fw.write("add a line\n");//appends the string to the file
-        } catch(IOException e){
-            System.err.println("Error: " + e.getMessage());
-            return false;
+        try {
+            ErrorHandler.handleNullString(fPath);
+            ErrorHandler.handleNullRecipe(r);
+            File f = new File(fPath);
+            ErrorHandler.handleFileNotFound(f);
+            ErrorHandler.handleFileWriteRight(f);
+        } catch (FileNotFoundException | NullPointerException | AccessDeniedException e) {
+            System.err.println(e.getMessage());
+        }
+        try (FileWriter fw = new FileWriter(fPath,true)){
+            StringBuilder sb = new StringBuilder();
+            sb.append(r.couleur).append(",")
+                    .append(r.nom).append(",")
+                    .append(r.type).append(",")
+                    .append(r.degree).append(",")
+                    .append(r.prix).append(",")
+                    .append(r.ingredients.toString()
+                        .replace(" ", "")
+                        .replace("[", "")
+                        .replace("]", ""))
+                    .append("\n");
+            fw.write(sb.toString());
         }
         return true;
     }
