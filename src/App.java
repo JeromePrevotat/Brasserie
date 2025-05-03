@@ -14,7 +14,7 @@ public class App {
         
         try {
             Brasserie brasserie = new Brasserie("Brasserie R5", 5);
-           recipeList = Recipe.readRecipeFromFile(RECIPES_PATH);
+            recipeList = Recipe.readRecipeFromFile(RECIPES_PATH);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -22,8 +22,6 @@ public class App {
             System.out.println(r);
         }
 
-        while (true) { 
-            
-        }
+        
     }
 }

@@ -4,6 +4,7 @@ import brasserie.model.Recipe;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.AccessDeniedException;
+import java.util.HashMap;
 import java.util.List;
 
 public class ErrorHandler {
@@ -82,7 +83,12 @@ public class ErrorHandler {
     }
 
     public static boolean handleNbCuves(int nbCuves){
-        if (nbCuves <= 0) throw new IllegalArgumentException("Error: Argument <cuves> must be Greater then Zero");
+        if (nbCuves <= 0) throw new IllegalArgumentException("Error: Argument <cuves> must be Greater than Zero");
+        return true;
+    }
+
+    public static boolean handleNullCuves(HashMap<Cuve,Recipe> cuves){
+        if (cuves == null) throw new NullPointerException("Error: Argument <cuves> cannot be null");
         return true;
     }
 

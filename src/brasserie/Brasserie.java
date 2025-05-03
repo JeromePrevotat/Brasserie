@@ -2,19 +2,21 @@ package brasserie;
 
 import brasserie.model.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
 
-public class Brasserie {
+public class Brasserie{
     private String nom;
-    private int cuves;
-    private List<Recipe> recipeList = new ArrayList<>();
+    private int nbCuves;
+    private List<Recipe> recipeList;
+    private HashMap<Cuve, Recipe> cuves;
 
-    public Brasserie(String nom, int cuves, List<Recipe>recipeList) {
+    public Brasserie(String nom, int nbCuves) {
         this.nom = nom;
-        ErrorHandler.handleNbCuves(cuves);
-        this.cuves = cuves;
-        ErrorHandler.handleNullRecipeList(recipeList);
-        this.recipeList = recipeList;
+        this.nbCuves = nbCuves;
+        this.recipeList = new ArrayList<>();
+        this.cuves = new HashMap<>();
     }
 
     // GETTER
@@ -22,7 +24,11 @@ public class Brasserie {
         return this.nom;
     }
 
-    public int getCuves(){
+    public int getNbCuves(){
+        return this.nbCuves;
+    }
+    
+    public HashMap<Cuve, Recipe> getCuves(){
         return this.cuves;
     }
 
@@ -35,7 +41,13 @@ public class Brasserie {
         this.nom = nom;
     }
 
-    public void setCuves(int cuves){
+    public void setNbCuves(int nbCuves){
+        ErrorHandler.handleNbCuves(nbCuves);
+        this.nbCuves = nbCuves;
+    }
+
+    public void setCuves(HashMap<Cuve, Recipe> cuves){
+        ErrorHandler.handleNullCuves(cuves);
         this.cuves = cuves;
     }
 
@@ -54,5 +66,15 @@ public class Brasserie {
                 recette.getPrix(),
                 recette.getIngredients()
         );
+    }
+
+    private void createBrewingDaemon(int cuve, Recipe r){
+        int i = 0;
+        // while (i < this.cuves - 1){
+        //     i++;
+        // }
+        Timer daemon = new Timer(true);
+        Thread t = new Thread();
+        daemon.schedule(null, 0);
     }
 }
