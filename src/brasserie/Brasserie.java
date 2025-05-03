@@ -1,10 +1,11 @@
 package brasserie;
 
 import brasserie.model.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
+import java.util.concurrent.CompletableFuture;
 
 public class Brasserie{
     private String nom;
@@ -16,7 +17,8 @@ public class Brasserie{
         this.nom = nom;
         this.nbCuves = nbCuves;
         this.recipeList = new ArrayList<>();
-        this.cuves = new HashMap<>();
+        this.cuves = new HashMap<>(nbCuves);
+        initCuves();
     }
 
     // GETTER
@@ -57,24 +59,35 @@ public class Brasserie{
 
 
     // METHODS
-    public Beer brew(Recipe recette) {
-        return new Beer(
-                recette.getCouleur(),
-                recette.getNom(),
-                recette.getType(),
-                recette.getDegree(),
-                recette.getPrix(),
-                recette.getIngredients()
-        );
+    private void initCuves(){
+        int i = 0;
+        while (i < this.nbCuves){
+            this.cuves.put(new Cuve(), null);
+            i++;
+        }
     }
 
-    private void createBrewingDaemon(int cuve, Recipe r){
-        int i = 0;
-        // while (i < this.cuves - 1){
-        //     i++;
-        // }
-        Timer daemon = new Timer(true);
-        Thread t = new Thread();
-        daemon.schedule(null, 0);
+    public boolean freeCuve(){
+        for (Cuve c : this.cuves.keySet()){
+            if (this.cuves.get(c) == null) return true;
+        }
+        return false;
     }
+
+    private Beer createBrewingDaemon(Recipe r){
+        Cuve brewingCuve = null;
+        if (freeCuve()){
+            for (Cuve c : this.cuves.keySet()){
+                if (this.cuves.get(c) == null){
+                    brewingCuve = c;
+                }
+            }
+            if (brewingCuve == null) return null;
+            brewingCuve.setBrewingRecipe(r);
+            CompletableFuture<Beer> futureBeer = CompletableFuture.supplyAsync(() -> brewingCuve.brewing());
+            Beer b = futureBeer.get();
+        }
+    }
+
+
 }
