@@ -1,5 +1,5 @@
 package brasserie;
-import brasserie.model.Couleur;
+import brasserie.model.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.AccessDeniedException;
@@ -23,7 +23,7 @@ public class ErrorHandler {
     }
 
     public static void handleCouleurEnum(String s) throws IllegalArgumentException{
-        for (Couleur c : Couleur.values()) {
+        for (Color c : Color.values()) {
             if (c.name().equals(s)) return;
         }
         throw new IllegalArgumentException("Error: Argument <color> does not match any known Color");

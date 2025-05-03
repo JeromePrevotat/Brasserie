@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class Recette {
+public class Recipe {
 
-    private Couleur couleur;
+    private Color couleur;
     private String nom;
     private String type = "";
     private double degree;
     private double prix;
     private List<String> ingredients;
 
-    public Recette(Couleur couleur, String nom, String type, double degree, double prix, List<String> ingredients){
+    public Recipe(Color couleur, String nom, String type, double degree, double prix, List<String> ingredients){
         ErrorHandler.handleCouleurEnum(couleur.name());
         this.couleur = couleur;
         ErrorHandler.handleEmptyString(nom, "nom");
@@ -31,32 +31,32 @@ public class Recette {
     }
 
     // GETTERS
-    public Couleur getCouleur() {
-        return couleur;
+    public Color getCouleur() {
+        return this.couleur;
     }
 
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public double getDegree() {
-        return degree;
+        return this.degree;
     }
 
     public double getPrix() {
-        return prix;
+        return this.prix;
     }
 
     public List<String> getIngredients() {
-        return ingredients;
+        return this.ingredients;
     }
 
     // SETTERS
-    public void setCouleur(Couleur couleur) {
+    public void setCouleur(Color couleur) {
         ErrorHandler.handleCouleurEnum(couleur.name());
         this.couleur = couleur;
     }
@@ -86,8 +86,8 @@ public class Recette {
     }
 
     // METHODS
-    public static List<Recette> readRecipeFromFile(String fPath) throws Exception {
-        List<Recette> recipeList = new ArrayList<>();
+    public static List<Recipe> readRecipeFromFile(String fPath) throws Exception {
+        List<Recipe> recipeList = new ArrayList<>();
         File f = new File(fPath);
         String[] args;
         List<String> ingredients = new ArrayList<>();
@@ -112,10 +112,39 @@ public class Recette {
                 ErrorHandler.handleCSVArgParsing(args);
                 ErrorHandler.handleCSVArgType(args);
                 // Create New Recipe
-                recipeList.add(new Recette(Couleur.valueOf(args[0]), args[1], args[2], Double.parseDouble(args[3]), Double.parseDouble(args[4]), ingredients));
+                recipeList.add(new Recipe(Couleur.valueOf(args[0]), args[1], args[2], Double.parseDouble(args[3]), Double.parseDouble(args[4]), ingredients));
             }
         }
         return recipeList;
+    }
+
+    public static boolean readRecipeFromFile(Recipe r, String fPath) throws Exception {
+        File f = new File(fPath);
+        String[] args;
+        List<String> ingredients = new ArrayList<>();
+
+        ErrorHandler.handleFileNotFound(f);
+        ErrorHandler.handleFileReadRight(f);
+
+        try (Scanner fileReader = new Scanner(f)) {
+            while (fileReader.hasNextLine()){
+                // GNL
+                String line = fileReader.nextLine();
+                args = line.split(",");
+                // Reset iterators
+                ingredients.clear();
+                int i = 5;
+                // Get Ingredients as List
+                while (i < args.length){
+                    ingredients.add(args[i]);
+                    i++;
+                }
+                // Handles Errror
+                ErrorHandler.handleCSVArgParsing(args);
+                ErrorHandler.handleCSVArgType(args);
+            }
+        }
+        return true;
     }
 
     @Override

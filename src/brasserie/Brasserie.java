@@ -7,7 +7,7 @@ import java.util.List;
 public class Brasserie {
     private String nom;
     private int cuves;
-    private static List<Recette> RecipeList = new ArrayList<>();
+    private static List<Recipe> RecipeList = new ArrayList<>();
 
     public Brasserie(String nom, int cuves) {
         this.nom = nom;
@@ -32,7 +32,7 @@ public class Brasserie {
         this.cuves = cuves;
     }
 
-    public Beer brew(Recette recette) {
+    public Beer brew(Recipe recette) {
         return new Beer(
                 recette.getCouleur(),
                 recette.getNom(),

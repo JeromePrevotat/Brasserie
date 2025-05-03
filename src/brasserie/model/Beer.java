@@ -4,14 +4,14 @@ import brasserie.ErrorHandler;
 import java.util.List;
 
 public class Beer {
-    private Couleur couleur;
+    private Color couleur;
     private String nom;
     private String type;
     private double degree;
     private double prix;
     private List<String> ingredients;
 
-    public Beer(Couleur couleur, String nom, String type, double degree, double prix, List<String> ingredients) {
+    public Beer(Color couleur, String nom, String type, double degree, double prix, List<String> ingredients) {
         this.couleur = couleur;
         ErrorHandler.handleEmptyString(nom, "nom");
         this.nom = nom;
@@ -24,27 +24,27 @@ public class Beer {
 
     // GETTERS
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public double getDegree() {
-        return degree;
+        return this.degree;
     }
 
     public double getPrix() {
-        return prix;
+        return this.prix;
     }
 
     public List<String> getIngredients() {
-        return ingredients;
+        return this.ingredients;
     }
 
-    public Couleur getCouleur() {
-        return couleur;
+    public Color getCouleur() {
+        return this.couleur;
     }
 
     // SETTERS
@@ -68,14 +68,13 @@ public class Beer {
         this.ingredients = ingredients;
     }
 
-    public void setCouleur(Couleur couleur) {
+    public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
 
     // METHODS
     @Override
     public String toString() {
-
         StringBuilder sb = new StringBuilder();
         sb.append(this.getNom()).append(" (").append(this.getCouleur()).append(")\n")
           .append("Type: ").append(this.getType())
