@@ -4,7 +4,7 @@ import brasserie.model.Beer;
 import brasserie.model.Recipe;
 import java.time.Instant;
 
-public class Cuve implements Runnable {
+public class Cuve{
     private Recipe brewingRecipe;
     private long start;
     private Beer beer;
@@ -44,8 +44,13 @@ public class Cuve implements Runnable {
     // METHODS
     public Beer brewing(){
         this.start = Instant.now().getEpochSecond();
-        while (Instant.now().getEpochSecond() < (this.start + (this.brewingRecipe.getBrewingTime() * 1000))){
+        long brewingTimeLeft = this.brewingRecipe.getBrewingTime();
+        while (Instant.now().getEpochSecond() < (this.start + (this.brewingRecipe.getBrewingTime()))){
             // BREWING
+            if (brewingTimeLeft > (this.start + (this.brewingRecipe.getBrewingTime())) - Instant.now().getEpochSecond()){
+                brewingTimeLeft = (this.start + (this.brewingRecipe.getBrewingTime())) - Instant.now().getEpochSecond();
+                System.out.println("Brewing: " + brewingTimeLeft);
+            }
         }
         return brew(this.brewingRecipe);
     }

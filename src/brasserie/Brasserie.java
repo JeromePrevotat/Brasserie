@@ -53,7 +53,7 @@ public class Brasserie{
         this.cuves = cuves;
     }
 
-    public void getRecipeList(List<Recipe> recipeList){
+    public void setRecipeList(List<Recipe> recipeList){
         this.recipeList = recipeList;
     }
 
@@ -74,7 +74,7 @@ public class Brasserie{
         return false;
     }
 
-    private Beer createBrewingDaemon(Recipe r){
+    public Beer createBrewingDaemon(Recipe r){
         if (freeCuve()){
             for (Cuve c : this.cuves.keySet()){
                 if (this.cuves.get(c) == null){

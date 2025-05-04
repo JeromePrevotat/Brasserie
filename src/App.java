@@ -1,4 +1,5 @@
 import brasserie.Brasserie;
+import brasserie.model.Beer;
 import brasserie.model.Recipe;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +11,22 @@ public class App {
         final String RECIPES_PATH = PWD + SEP + "src" + SEP + "brasserie" + SEP + "recipes.csv";
 
         List<Recipe> recipeList = new ArrayList<>();
+        Beer test;
 
         
         try {
             Brasserie brasserie = new Brasserie("Brasserie R5", 5);
             recipeList = Recipe.readRecipeFromFile(RECIPES_PATH);
+            brasserie.setRecipeList(recipeList);
+            test = brasserie.createBrewingDaemon(brasserie.getRecipeList().get(0));
+            for (Recipe r : recipeList){
+                System.out.println(r);
+            }
+            System.out.println("BEER: " + test.toString());
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        for (Recipe r : recipeList){
-            System.out.println(r);
-        }
+        
 
         
     }
