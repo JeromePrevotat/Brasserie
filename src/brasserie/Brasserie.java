@@ -1,11 +1,11 @@
 package brasserie;
 
 import brasserie.model.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class Brasserie{
     private String nom;
@@ -75,19 +75,22 @@ public class Brasserie{
     }
 
     private Beer createBrewingDaemon(Recipe r){
-        Cuve brewingCuve = null;
         if (freeCuve()){
             for (Cuve c : this.cuves.keySet()){
                 if (this.cuves.get(c) == null){
-                    brewingCuve = c;
+                    c.setBrewingRecipe(r);;
+                    CompletableFuture<Beer> futureBeer = CompletableFuture.supplyAsync(() -> c.brewing());
+                    try{
+                        Beer b = futureBeer.get();
+                        c.resetCuve();
+                        return b;
+                    } catch (InterruptedException | ExecutionException e){
+                    System.err.println(e.getMessage());
+                    }
                 }
             }
-            if (brewingCuve == null) return null;
-            brewingCuve.setBrewingRecipe(r);
-            CompletableFuture<Beer> futureBeer = CompletableFuture.supplyAsync(() -> brewingCuve.brewing());
-            Beer b = futureBeer.get();
         }
+        return null;
     }
-
 
 }
