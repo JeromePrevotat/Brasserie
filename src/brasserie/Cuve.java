@@ -43,12 +43,29 @@ public class Cuve{
 
     // METHODS
     public Beer brewing(){
+        int etape = 0;
+        String[] listEtape = {
+            "Concassage du malt",
+            "Empâtage (ajout d'Eau)",
+            "Brassage (chauffer)",
+            "Filtration",
+            "Rinçage des drêches",
+            "Ébullition",
+            "Refroidissement",
+            "Ensemencement (ajout des Levures)",
+            "Fermentation",
+            "Maturation"};
         this.start = Instant.now().getEpochSecond();
         long brewingTimeLeft = this.brewingRecipe.getBrewingTime();
+        System.out.println("Brewing: " + brewingTimeLeft);
         while (Instant.now().getEpochSecond() < (this.start + (this.brewingRecipe.getBrewingTime()))){
             // BREWING
             if (brewingTimeLeft > (this.start + (this.brewingRecipe.getBrewingTime())) - Instant.now().getEpochSecond()){
                 brewingTimeLeft = (this.start + (this.brewingRecipe.getBrewingTime())) - Instant.now().getEpochSecond();
+                if (brewingTimeLeft % 2 == 0 && etape < listEtape.length){
+                    System.out.println("ETAPE: " + listEtape[etape]);
+                    etape++;
+                }
                 System.out.println("Brewing: " + brewingTimeLeft);
             }
         }

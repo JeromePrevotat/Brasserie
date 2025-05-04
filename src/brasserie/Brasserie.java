@@ -4,8 +4,6 @@ import brasserie.model.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class Brasserie{
     private String nom;
@@ -74,19 +72,41 @@ public class Brasserie{
         return false;
     }
 
+    // public Beer createBrewingDaemon(Recipe r){
+    //     // If a Cuve is Empty we can brew
+    //     if (freeCuve()){
+    //         // Get the first empty cuve
+    //         for (Cuve c : this.cuves.keySet()){
+    //             if (this.cuves.get(c) == null){
+    //                 // Set the cuve recipe to brew
+    //                 c.setBrewingRecipe(r);
+    //                 // Async call
+    //                 CompletableFuture<Beer> futureBeer = CompletableFuture.supplyAsync(() -> c.brewing());
+    //                 try{
+    //                     Beer b = futureBeer.get();
+    //                     c.resetCuve();
+    //                     return b;
+    //                 } catch (InterruptedException | ExecutionException e){
+    //                     System.err.println(e.getMessage());
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return null;
+    // }
+
     public Beer createBrewingDaemon(Recipe r){
+        // If a Cuve is Empty we can brew
         if (freeCuve()){
+            // Get the first empty cuve
             for (Cuve c : this.cuves.keySet()){
                 if (this.cuves.get(c) == null){
-                    c.setBrewingRecipe(r);;
-                    CompletableFuture<Beer> futureBeer = CompletableFuture.supplyAsync(() -> c.brewing());
-                    try{
-                        Beer b = futureBeer.get();
-                        c.resetCuve();
-                        return b;
-                    } catch (InterruptedException | ExecutionException e){
-                    System.err.println(e.getMessage());
-                    }
+                    // Set the cuve recipe to brew
+                    c.setBrewingRecipe(r);
+                    // Async call
+                    Beer futureBeer = c.brewing();
+                    c.resetCuve();
+                    return futureBeer;
                 }
             }
         }
